@@ -6,10 +6,10 @@ import java.net.Socket;
 
 
 public class LServerHandler implements Runnable {
-    private Socket socket;
-    private LangServer server;
-    private BufferedReader input;
-    private PrintWriter output;
+    private final Socket socket;
+    private final LangServer server;
+    private final BufferedReader input;
+    private final PrintWriter output;
 
     public LServerHandler(Socket socket, LangServer server) throws IOException {
 
@@ -49,6 +49,8 @@ public class LServerHandler implements Runnable {
                         String[] t = trans.split("=");
                         server.getTransMap().put(t[0], t[1]);
                     }
+
+                    server.setLanguage(language);
                     System.out.println("ADDED: " + language + '=' + server.getTransMap());
 
                     System.out.println("SENDING: setack," + server.getServer().getLocalPort());
@@ -66,6 +68,7 @@ public class LServerHandler implements Runnable {
 
                 case "get" -> {
                     text = parts[1];
+                    language = parts[2];
                     port = parts[3];
 
                     text = text.replace(';', ',');
@@ -73,6 +76,11 @@ public class LServerHandler implements Runnable {
                     Socket client = new Socket();
                     client.connect(new InetSocketAddress("localhost", Integer.parseInt(port)));
                     PrintWriter output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+
+                    if(!language.equals(server.getLanguage()))
+                        output.println("err,Incorrect language");
+
+
 
                     boolean canTranslate = true;
                     StringBuilder sb = new StringBuilder();
@@ -100,9 +108,7 @@ public class LServerHandler implements Runnable {
                     output.close();
                 }
 
-                default -> {
-                    output.println("err,unknown cmd");
-                }
+                default -> output.println("err,unknown cmd");
             }
 
             socket.close();

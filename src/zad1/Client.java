@@ -3,10 +3,6 @@ package zad1;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.*;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class Client extends JFrame{
 
@@ -18,20 +14,17 @@ public class Client extends JFrame{
 
 
 
-    public Client() {
-        setDisplay(400, 700, "Client");
-        setGUI();
-        pack();
-    }
-
     public void setDisplay(int width, int height, String title) {
         setPreferredSize(new Dimension(width, height));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(title);
 
+        pack();
+
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+
     }
 
 
@@ -72,6 +65,7 @@ public class Client extends JFrame{
 
         add(mainPanel);
 
+        pack();
     }
 
     public void setTextArea(JTextArea area) {
@@ -106,55 +100,9 @@ public class Client extends JFrame{
     }
 
     public void translate(ActionEvent e) {
-        Socket client = new Socket();
-
-        if(!outputText.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(new JFrame(), "Change data to translate again", "Error Message", JOptionPane.INFORMATION_MESSAGE);
-        } else if(inputText.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(new JFrame(), "Enter text to translate", "Error Message", JOptionPane.INFORMATION_MESSAGE);
-        }  else if(inputLang.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(new JFrame(), "Enter language to be translated into", "Error Message", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-
-            try {
-                ServerSocket responseServer = new ServerSocket(0);
-                client.connect(new InetSocketAddress("localhost", 6600));
-                PrintWriter output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
-
-                String text = inputText.getText()
-                        .replace('\n', ' ')
-                        .replace(',', ';');
-
-                output.println("get," + text + ',' + inputLang.getText() + ',' + responseServer.getLocalPort());
-
-                Socket respondingServer = responseServer.accept();
-
-
-                BufferedReader input = new BufferedReader(new InputStreamReader(respondingServer.getInputStream()));
-
-                String response = input.readLine();
-
-                String[] parts = response.split(",");
-
-                String cmd = parts[0];
-                text = parts[1];
-
-                switch (cmd) {
-                    case "get" -> {
-                        outputText.setText(text);
-                    }
-
-                    case "err" -> {
-                        JOptionPane.showMessageDialog(new JFrame(), text, "Error Message", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-            repaint();
-        }
+        ClientHandler ch = new ClientHandler();
+        ch.setText(inputText, inputLang, outputText);
+        repaint();
     }
 
 

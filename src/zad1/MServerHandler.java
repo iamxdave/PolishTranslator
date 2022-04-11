@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class MServerHandler implements Runnable {
 
-    private Socket socket;
-    private MainServer server;
-    private BufferedReader input;
-    private PrintWriter output;
+    private final Socket socket;
+    private final MainServer server;
+    private final BufferedReader input;
+    private final PrintWriter output;
 
     public MServerHandler(Socket socket, MainServer server) throws IOException {
 
@@ -106,9 +106,7 @@ public class MServerHandler implements Runnable {
                     }
                 }
 
-                default -> {
-                    output.println("err,Unknown cmd");
-                }
+                default -> output.println("err,Unknown cmd");
             }
 
             socket.close();

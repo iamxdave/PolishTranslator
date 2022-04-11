@@ -1,16 +1,16 @@
 package zad1;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainServer {
-    private ServerSocket server;
-    private Map<String, Integer> langServerMap = new HashMap<>();
-    private Map<String, Map<String, String>> langTransMap = new HashMap<>();
+    private final ServerSocket server;
+    private final Map<String, Integer> langServerMap = new HashMap<>();
+    private final Map<String, Map<String, String>> langTransMap = new HashMap<>();
 
 
     public MainServer(int port) throws IOException {
