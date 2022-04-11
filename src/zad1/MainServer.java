@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 public class MainServer {
     private ServerSocket server;
-    private Map<String, Socket> langServerMap = new HashMap<>();
+    private Map<String, Integer> langServerMap = new HashMap<>();
     private Map<String, Map<String, String>> langTransMap = new HashMap<>();
 
 
@@ -21,7 +21,7 @@ public class MainServer {
         return server;
     }
 
-    public Map<String, Socket> getLangServerMap() {
+    public Map<String, Integer> getLangServerMap() {
         return langServerMap;
     }
 

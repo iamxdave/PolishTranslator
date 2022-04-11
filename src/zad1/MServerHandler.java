@@ -17,7 +17,7 @@ public class MServerHandler implements Runnable {
         this.socket = socket;
         this.server = server;
 
-        System.out.println("Connected: " + socket);
+        System.out.println("Connected: " + socket.getPort());
 
         input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
@@ -36,12 +36,12 @@ public class MServerHandler implements Runnable {
             String cmd = parts[0];
             String text;
             String language;
-            String port;
+            String adress;
 
 
             switch (cmd) {
                 case "set" -> {
-                    port = parts[1];
+                    adress = parts[1];
                     if (!server.getLangTransMap().isEmpty()) {
                         Map.Entry<String, Map<String, String>> entry = server.getLangTransMap().entrySet().iterator().next();
 
@@ -54,7 +54,7 @@ public class MServerHandler implements Runnable {
                         }
 
                         Socket langServer = new Socket();
-                        langServer.connect(new InetSocketAddress("localhost", Integer.parseInt(port)));
+                        langServer.connect(new InetSocketAddress("localhost", Integer.parseInt(adress)));
                         PrintWriter langServerOutput = new PrintWriter(new OutputStreamWriter(langServer.getOutputStream()), true);
 
                         System.out.println("SENDING: set," + sb);
@@ -71,9 +71,9 @@ public class MServerHandler implements Runnable {
 
                 case "setack" -> {
                     language = parts[1];
-                    port = parts[2];
+                    adress = parts[2];
 
-                    server.getLangServerMap().put(language, new Socket("localhost", Integer.parseInt(port)));
+                    server.getLangServerMap().put(language, Integer.parseInt(adress));
 
                     server.getLangTransMap().remove(language);
                 }
@@ -81,25 +81,25 @@ public class MServerHandler implements Runnable {
                 case "get" -> {
                     text = parts[1];
                     language = parts[2];
-                    port = parts[3];
+                    adress = parts[3];
 
                     boolean canTranslate = server.getLangServerMap().entrySet().stream().anyMatch(e -> e.getKey().equals(language));
 
                     if (canTranslate) {
-                        Socket langServer = server.getLangServerMap().get(language);
+                        Socket langServer = new Socket("localhost", server.getLangServerMap().get(language));
                         PrintWriter output = new PrintWriter(new OutputStreamWriter(langServer.getOutputStream()), true);
 
-                        System.out.println("SENDING: get," + text + ',' + language + ',' + port);
-                        output.println("get," + text + ',' + language + ',' + port);
+                        System.out.println("SENDING: get," + text + ',' + language + ',' + adress);
+                        output.println("get," + text + ',' + language + ',' + adress);
 
                         langServer.close();
                         output.close();
                     } else {
-                        Socket client = new Socket("localhost", Integer.parseInt(port));
+                        Socket client = new Socket("localhost", Integer.parseInt(adress));
                         PrintWriter output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
 
-                        System.out.println("SENDING: err,no such language in the database");
-                        output.println("err,no such language in the database");
+                        System.out.println("SENDING: err,No such language in the database");
+                        output.println("err,No such language in the database");
 
                         client.close();
                         output.close();
@@ -107,7 +107,7 @@ public class MServerHandler implements Runnable {
                 }
 
                 default -> {
-                    output.println("err,unknown cmd");
+                    output.println("err,Unknown cmd");
                 }
             }
 

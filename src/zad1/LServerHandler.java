@@ -16,7 +16,7 @@ public class LServerHandler implements Runnable {
         this.socket = socket;
         this.server = server;
 
-        System.out.println("Connected: " + socket);
+        System.out.println("\nConnected: " + socket.getPort());
 
         input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
@@ -84,8 +84,8 @@ public class LServerHandler implements Runnable {
                         if (canTranslate) {
                             sb.append(server.getTransMap().get(word)).append(" ");
                         } else {
-                            System.out.println("SENDING: err, no such word in the database");
-                            output.println("err,no such word in the database");
+                            System.out.println("SENDING: err,No such word in the database");
+                            output.println("err,No such word in the database");
                             break;
                         }
                     }
