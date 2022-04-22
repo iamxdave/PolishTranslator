@@ -15,8 +15,8 @@ ________________________________________________________________________________
   2. Choose language into which polish words will be translated.
   3. Get the result in the output panel at the bottom of the application.
 
-
-
+<br />
+<br />
 
 # General information about the application
   
