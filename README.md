@@ -16,6 +16,8 @@ ________________________________________________________________________________
   3. Get the result in the output panel at the bottom of the application.
 
 
+
+
 # General information about the application
   
   The program consists of a client, main server and language servers. Client sends a request to the main server for the translation. 
