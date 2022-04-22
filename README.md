@@ -17,6 +17,7 @@ ________________________________________________________________________________
 
 <br />
 <br />
+<br />
 
 # General information about the application
   
@@ -30,7 +31,8 @@ ________________________________________________________________________________
 
 
 __________________________________________________________________________________________________________________
-  
+
+<br />  
 ## Other information also good to know  
   
   1. The app **does not translate all** polish words, only ones which you chose and put in the **putAvailableLanguages** method in MainServer class.
