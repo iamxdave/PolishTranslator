@@ -1,13 +1,12 @@
 # PolishTranslator
 Swing application with sockets allowing to translate polish words into appropriate ones in another language.
 
-__________________________________________________________________________________________________________________
-
 <p align="center">
   <img src=https://user-images.githubusercontent.com/74014874/164570882-4a5478b9-c52a-4a55-985b-f74ff7200eb8.png
    >
 </p>
 
+__________________________________________________________________________________________________________________
 
 
 # How it works
@@ -16,8 +15,6 @@ ________________________________________________________________________________
   2. Choose language into which polish words will be translated.
   3. Get the result in the output panel at the bottom of the application.
 
-
-__________________________________________________________________________________________________________________
 
 # General information about the application
   
@@ -29,6 +26,8 @@ ________________________________________________________________________________
    >
 </p>
 
+
+__________________________________________________________________________________________________________________
   
 ## Other information also good to know  
   
