@@ -1,5 +1,5 @@
 # PolishTranslator
-Swing application with sockets allowing to translate polish words into ones in another language
+Swing application with sockets allowing to translate polish words into appropriate ones in another language.
 
 __________________________________________________________________________________________________________________
 
