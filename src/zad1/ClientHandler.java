@@ -24,6 +24,7 @@ public class ClientHandler {
                 ServerSocket responseServer = new ServerSocket(0);
                 client.connect(new InetSocketAddress("localhost", 6600));
                 PrintWriter output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+                BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
                 String text = inputText.getText()
                         .replace('\n', ' ')
@@ -31,23 +32,36 @@ public class ClientHandler {
 
                 output.println("get," + text + ',' + inputLang.getText() + ',' + responseServer.getLocalPort());
 
-                Socket respondingServer = responseServer.accept();
-
-
-                BufferedReader input = new BufferedReader(new InputStreamReader(respondingServer.getInputStream()));
 
                 String response = input.readLine();
-
                 String[] parts = response.split(",");
 
                 String cmd = parts[0];
                 text = parts[1];
 
                 switch (cmd) {
-                    case "get" -> outputText.setText(text);
+                    case "getack" -> {
+                        Socket respondingServer = responseServer.accept();
+                        BufferedReader inputServer = new BufferedReader(new InputStreamReader(respondingServer.getInputStream()));
 
-                    case "err" -> JOptionPane.showMessageDialog(new JFrame(), text, "Error Message", JOptionPane.ERROR_MESSAGE);
+                        boolean empty = false;
+                        String responseFromServer = inputServer.readLine();
+
+                        parts = responseFromServer.split(",");
+                        cmd = parts[0];
+                        text = parts[1];
+
+                        switch (cmd) {
+                            case "get" -> outputText.setText(text);
+
+                            case "err" -> JOptionPane.showMessageDialog(new JFrame(), text, "Error Message From LangServer", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+
+                    case "err" -> JOptionPane.showMessageDialog(new JFrame(), text, "Error Message From MainServer", JOptionPane.ERROR_MESSAGE);
                 }
+
+
 
             } catch (IOException ex) {
                 ex.printStackTrace();

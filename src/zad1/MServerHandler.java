@@ -1,6 +1,7 @@
 package zad1;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Map;
@@ -87,21 +88,21 @@ public class MServerHandler implements Runnable {
 
                     if (canTranslate) {
                         Socket langServer = new Socket("localhost", server.getLangServerMap().get(language));
-                        PrintWriter output = new PrintWriter(new OutputStreamWriter(langServer.getOutputStream()), true);
+                        PrintWriter outputLangServer = new PrintWriter(new OutputStreamWriter(langServer.getOutputStream()), true);
 
                         System.out.println("SENDING: get," + text + ',' + language + ',' + adress);
-                        output.println("get," + text + ',' + language + ',' + adress);
+                        outputLangServer.println("get," + text + ',' + language + ',' + adress);
 
-                        langServer.close();
+                        System.out.println("SENDING: getack," + server.getServer().getLocalPort());
+                        output.println("getack," + server.getServer().getLocalPort());
+
                         output.close();
+                        langServer.close();
+                        outputLangServer.close();
                     } else {
-                        Socket client = new Socket("localhost", Integer.parseInt(adress));
-                        PrintWriter output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
-
                         System.out.println("SENDING: err,No such language in the database");
                         output.println("err,No such language in the database");
 
-                        client.close();
                         output.close();
                     }
                 }
@@ -113,6 +114,9 @@ public class MServerHandler implements Runnable {
             input.close();
             output.close();
 
+        } catch (ConnectException e) {
+            System.out.println("SENDING: err,Current language server has disconnected");
+            output.println("err,Current language server has disconnected");
         } catch (IOException e) {
             e.printStackTrace();
         }
