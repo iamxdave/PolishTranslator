@@ -7,7 +7,7 @@ Swing application with sockets allowing to translate polish words into appropria
 </p>
 
 __________________________________________________________________________________________________________________
-
+<br />
 
 # How it works
 
@@ -15,7 +15,6 @@ ________________________________________________________________________________
   2. Choose language into which polish words will be translated.
   3. Get the result in the output panel at the bottom of the application.
 
-<br />
 <br />
 <br />
 
@@ -31,8 +30,8 @@ ________________________________________________________________________________
 
 
 __________________________________________________________________________________________________________________
+<br />
 
-<br />  
 ## Other information also good to know  
   
   1. The app **does not translate all** polish words, only ones which you chose and put in the **putAvailableLanguages** method in MainServer class.
