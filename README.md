@@ -4,7 +4,7 @@ Swing application with sockets allowing to translate polish words into ones in a
 __________________________________________________________________________________________________________________
 
 <p align="center">
-  <img src=(https://user-images.githubusercontent.com/74014874/164570882-4a5478b9-c52a-4a55-985b-f74ff7200eb8.png
+  <img src=https://user-images.githubusercontent.com/74014874/164570882-4a5478b9-c52a-4a55-985b-f74ff7200eb8.png
    >
 </p>
 
