@@ -8,14 +8,6 @@ Swing application with sockets allowing to translate polish words into appropria
 
 __________________________________________________________________________________________________________________
 <br />
-
-## How it works
-
-  1. Run program and put words in polish to translate in the input panel.
-  2. Choose language into which polish words will be translated.
-  3. Get the result in the output panel at the bottom of the application.
-
-<br />
 <br />
 
 # General information about the application
@@ -27,6 +19,14 @@ ________________________________________________________________________________
   <img src=https://user-images.githubusercontent.com/74014874/164575387-14ee7302-9cf5-4150-a189-88c6f41c98dd.png
    >
 </p>
+
+## How it works
+
+  1. Run program and put words in polish to translate in the input panel.
+  2. Choose language into which polish words will be translated.
+  3. Get the result in the output panel at the bottom of the application.
+
+
 
 
 __________________________________________________________________________________________________________________
