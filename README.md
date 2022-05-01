@@ -9,7 +9,7 @@ Swing application with sockets allowing to translate polish words into appropria
 __________________________________________________________________________________________________________________
 <br />
 
-# How it works
+## How it works
 
   1. Run program and put words in polish to translate in the input panel.
   2. Choose language into which polish words will be translated.
