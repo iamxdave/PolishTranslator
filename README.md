@@ -8,7 +8,6 @@ Swing application with sockets allowing to translate polish words into appropria
 
 __________________________________________________________________________________________________________________
 <br />
-<br />
 
 # General information about the application
   
@@ -19,6 +18,8 @@ ________________________________________________________________________________
   <img src=https://user-images.githubusercontent.com/74014874/164575387-14ee7302-9cf5-4150-a189-88c6f41c98dd.png
    >
 </p>
+
+<br />
 
 ## How it works
 
