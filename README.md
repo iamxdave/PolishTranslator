@@ -7,7 +7,7 @@ Swing application with sockets allowing to translate polish words into appropria
 </p>
 
 <hr>
-<br />
+<br/>
 
 # General information about the application
   
@@ -19,7 +19,7 @@ Swing application with sockets allowing to translate polish words into appropria
    >
 </p>
 
-<br />
+<br/>
 
 ## How it works
 
@@ -31,7 +31,7 @@ Swing application with sockets allowing to translate polish words into appropria
 
 
 <hr>
-<br />
+<br/>
 
 ## Other information also good to know  
   
